@@ -9,7 +9,7 @@ btn.addEventListener("click", async function() {
 
     // requested number of profiles is valid or not
     if (number < 1 || number > 20 || !Number.isInteger(number)) {
-        alert("Enter a number between 1 and 20");
+        window.alert("Enter a number between 1 and 20");
         return;
     }
 
