@@ -7,14 +7,16 @@ btn.addEventListener("click", async function() {
 
     let number = Number(count.value);
 
+    // requested number of profiles is valid or not
     if (number < 1 || number > 20 || !Number.isInteger(number)) {
-        output.innerHTML = "<p class='text-danger'>Enter a number between 1 and 20</p>";
+        alert("Enter a number between 1 and 20");
         return;
     }
 
     try {
         output.innerHTML = "Loading users...";
 
+        // ask User for the number of profiles entered in the form.
         let response = await fetch(`https://randomuser.me/api/?results=${number}`);
 
         if (!response.ok) {
@@ -23,8 +25,10 @@ btn.addEventListener("click", async function() {
 
         let data = await response.json();
 
+        // Clear the loading message 
         output.innerHTML = "";
 
+        // Show the photo and contact details 
         data.results.forEach(function(user) {
             output.innerHTML += `
                 <div class="col-md-4 mb-3">
@@ -49,6 +53,7 @@ btn.addEventListener("click", async function() {
         });
 
     } catch (error) {
+        // Let the user know if the request fails
         output.innerHTML = "<p class='text-danger'>Something went wrong!</p>";
         console.log(error);
     }
